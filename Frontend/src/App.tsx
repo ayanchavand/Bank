@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Button } from './components/ui/button'
-
+import CardForm from './components/cardForm'
+import { ThemeProvider } from './components/themeProvider'
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-      <Button>Hello</Button>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <CardForm />
+      </ThemeProvider>
+
     </>
   )
 }
