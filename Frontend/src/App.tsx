@@ -1,8 +1,8 @@
 import './App.css'
 import CardForm from './components/cardForm'
 import { ThemeProvider } from './components/themeProvider'
-function App() {
 
+function App() {
 
   return (
     <>
