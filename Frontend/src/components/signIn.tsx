@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import {auth, firebaseAuth} from '../utils/firebase'
-import { Button } from "./ui/button";
+import { Button } from "./ui/button"
 
 export default function SignIn(){
     const onSignInWithGoogle = () =>{

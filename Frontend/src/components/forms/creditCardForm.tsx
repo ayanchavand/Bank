@@ -36,7 +36,7 @@ const creditFormSchema = z.object({
     pin: z.string().length(4, "PIN must be exactly 4 digits"),
 })
 
-export default function CreditCardForm(){
+export default function CreditCardForm() {
 
     const creditForm = useForm<z.infer<typeof creditFormSchema>>({
         resolver: zodResolver(creditFormSchema),
@@ -56,9 +56,11 @@ export default function CreditCardForm(){
         console.log(values)
     }
 
-     return (
-        <div className="border p-8">
+    return (
+        <>
+            <h1 className="text-4xl font-semibold my-6">Credit Card</h1>
             <Form{...creditForm}>
+
                 <form onSubmit={creditForm.handleSubmit(onSubmit, onInvalid)}>
 
                     <FormField
@@ -171,6 +173,6 @@ export default function CreditCardForm(){
                     <Button className='mt-7' type="submit">Submit</Button>
                 </form>
             </Form >
-        </div >
+        </>
     )
 }
