@@ -26,7 +26,7 @@ export default function cardForm() {
                 console.log(isCredit)
             }}>
                 <SelectTrigger className="">
-                    <SelectValue placeholder="Select Card Type" />
+                    <SelectValue placeholder="Credit Card" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
