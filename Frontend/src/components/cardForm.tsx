@@ -35,8 +35,7 @@ export default function cardForm() {
                     </SelectGroup>
                 </SelectContent>
             </Select>
-            <h1 className="text-4xl font-semibold my-6">Debit Card</h1>
-            {isCredit ? <CreditCardForm/>: <DebitCardForm/>}
+            {isCredit ? <CreditCardForm /> : <DebitCardForm />}
         </div>
     )
 
