@@ -1,8 +1,7 @@
-import React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
+import {firestore, doc, setDoc, getDoc, auth, arrayUnion, updateDoc} from '../../utils/firebase'
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -18,8 +17,6 @@ import {
     SelectContent,
     SelectItem,
     SelectTrigger,
-    SelectGroup,
-    SelectLabel,
     SelectValue,
 } from "@/components/ui/select"
 
@@ -45,6 +42,8 @@ const creditFormSchema = z.object({
 
 export default function CreditCardForm() {
 
+    const docPath = doc(firestore, 'users/' + auth.currentUser?.uid)
+
     const creditForm = useForm<z.infer<typeof creditFormSchema>>({
         resolver: zodResolver(creditFormSchema),
         defaultValues: {
@@ -60,9 +59,41 @@ export default function CreditCardForm() {
     })
 
     const onInvalid = (error) => console.error(error)
+
     function onSubmit(values: z.infer<typeof creditFormSchema>) {
         console.log(values)
+        const getCredData = async() =>{
+            try{
+                const data = (await getDoc(docPath)).data()
+                if(!data){
+
+                    const defaultData ={
+                        creditCard: [],
+                        debitCard:[],
+                    }
+
+                    try{
+                        await setDoc(docPath, defaultData)
+                    } catch(error){
+                        console.log("oops")
+                    }
+                }
+
+                else{
+                    await updateDoc(docPath, {
+                        creditCard: arrayUnion(values)
+                    })
+                }
+                
+            }catch(error){
+                console.log("Couldn't fetch")
+            }
+        }
+
+        getCredData()
+        
     }
+    
 
     return (
         <>

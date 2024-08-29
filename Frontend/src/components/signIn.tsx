@@ -6,6 +6,8 @@ export default function SignIn(){
     const onSignInWithGoogle = () =>{
         const provider = new firebaseAuth.GoogleAuthProvider()
         auth.signInWithPopup(provider)
+
+        if()
     }
     return(
         <div className="flex items-center justify-center ">
