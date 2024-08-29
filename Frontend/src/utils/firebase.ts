@@ -82,3 +82,49 @@ export const addDebitData = async (values: object) => {
     console.error("Couldn't fetch Data");
   }
 };
+
+export const getCreditCards = async () => {
+  try {
+    const docSnapshot = await getDoc(docPath);
+    
+    if (!docSnapshot.exists()) {
+      console.log("No such document!");
+      return null;
+    }
+    
+    const data = docSnapshot.data();
+    
+    if (!data || !data.creditCard) {
+      console.log("No credit card data found!");
+      return null;
+    }
+    
+    return data.creditCard;
+  } catch (error) {
+    console.error("Error fetching credit cards:", error);
+    throw error; // or return null, depending on how you want to handle errors
+  }
+}
+
+export const getDebitCards = async () => {
+  try {
+    const docSnapshot = await getDoc(docPath);
+    
+    if (!docSnapshot.exists()) {
+      console.log("No such document!");
+      return null;
+    }
+    
+    const data = docSnapshot.data();
+    
+    if (!data || !data.debitCard) {
+      console.log("No debit card data found!");
+      return null;
+    }
+    
+    return data.debitCard;
+  } catch (error) {
+    console.error("Error fetching debit cards:", error);
+    throw error; // or return null, depending on how you want to handle errors
+  }
+}
