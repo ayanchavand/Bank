@@ -8,6 +8,7 @@ import {
   getDoc,
   arrayUnion,
   updateDoc,
+  DocumentReference,
 } from "firebase/firestore";
 
 const firebaseApp = firebase.initializeApp({
@@ -26,66 +27,48 @@ export const firebaseAuth = firebase.auth;
 export { doc, setDoc, getDoc, arrayUnion, updateDoc };
 export default firebaseApp;
 
-const docPath = doc(firestore, "users/" + auth.currentUser?.uid);
-export const addCredData = async (values: object) => {
-  
-    try {
-    const data = (await getDoc(docPath)).data();
-    //Check if the default data exists in the Document 
-    //If it doesnt exist add the dault data
-    if (!data) {
-      const defaultData = {
-        creditCard: [],
-        debitCard: [],
-      };
-
-      try {
-        await setDoc(docPath, defaultData);
-      } catch (error) {
-        console.log("oops");
-      }
-      //if data exists append the new information
-    } else {
-      await updateDoc(docPath, {
-        creditCard: arrayUnion(values),
-      });
-    }
-  } catch (error) {
-    console.log("Couldn't fetch");
-  }
+const getUserDocRef = (): DocumentReference | null => {
+  const user = auth.currentUser;
+  return user ? doc(firestore, "users", user.uid) : null;
 };
 
-export const addDebitData = async (values: object) => {
-  
-    try {
-    const data = (await getDoc(docPath)).data();
-    //Check if the default data exists in the Document 
-    //If it doesnt exist add the dault data
-    if (!data) {
-      const defaultData = {
-        creditCard: [],
-        debitCard: [],
-      };
-
-      try {
-        await setDoc(docPath, defaultData);
-      } catch (error) {
-        console.error("oops");
-      }
-      //if data exists append the new information
-    } else {
-      await updateDoc(docPath, {
-        debitCard: arrayUnion(values),
-      });
-    }
-  } catch (error) {
-    console.error("Couldn't fetch Data");
+export const addCardData = async (values: object, cardType: 'creditCard' | 'debitCard') => {
+  const docRef = getUserDocRef();
+  if (!docRef) {
+    console.error("User not authenticated");
+    return;
   }
-};
 
-export const getCreditCards = async () => {
   try {
-    const docSnapshot = await getDoc(docPath);
+    const docSnapshot = await getDoc(docRef);
+    const data = docSnapshot.data();
+
+    if (!docSnapshot.exists() || !data) {
+      const defaultData = {
+        creditCard: [],
+        debitCard: [],
+      };
+      await setDoc(docRef, defaultData);
+    }
+
+    await updateDoc(docRef, {
+      [cardType]: arrayUnion(values),
+    });
+  } catch (error) {
+    console.error(`Error adding ${cardType} data:`, error);
+    throw error;
+  }
+};
+
+export const getCards = async (cardType: 'creditCard' | 'debitCard') => {
+  const docRef = getUserDocRef();
+  if (!docRef) {
+    console.error("User not authenticated");
+    return null;
+  }
+
+  try {
+    const docSnapshot = await getDoc(docRef);
     
     if (!docSnapshot.exists()) {
       console.log("No such document!");
@@ -94,37 +77,19 @@ export const getCreditCards = async () => {
     
     const data = docSnapshot.data();
     
-    if (!data || !data.creditCard) {
-      console.log("No credit card data found!");
+    if (!data || !data[cardType]) {
+      console.log(`No ${cardType} data found!`);
       return null;
     }
     
-    return data.creditCard;
+    return data[cardType];
   } catch (error) {
-    console.error("Error fetching credit cards:", error);
-    throw error; // or return null, depending on how you want to handle errors
+    console.error(`Error fetching ${cardType}:`, error);
+    throw error;
   }
-}
+};
 
-export const getDebitCards = async () => {
-  try {
-    const docSnapshot = await getDoc(docPath);
-    
-    if (!docSnapshot.exists()) {
-      console.log("No such document!");
-      return null;
-    }
-    
-    const data = docSnapshot.data();
-    
-    if (!data || !data.debitCard) {
-      console.log("No debit card data found!");
-      return null;
-    }
-    
-    return data.debitCard;
-  } catch (error) {
-    console.error("Error fetching debit cards:", error);
-    throw error; // or return null, depending on how you want to handle errors
-  }
-}
+export const addCreditData = (values: object) => addCardData(values, 'creditCard');
+export const addDebitData = (values: object) => addCardData(values, 'debitCard');
+export const getCreditCards = () => getCards('creditCard');
+export const getDebitCards = () => getCards('debitCard');
