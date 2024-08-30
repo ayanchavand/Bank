@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { addCredData } from '../../utils/firebase'
+import { addCreditData } from '../../utils/firebase'
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -61,7 +61,7 @@ export default function CreditCardForm() {
 
     function onSubmit(values: z.infer<typeof creditFormSchema>) {
         console.log(values)
-        addCredData(values)
+        addCreditData(values)
 
     }
 

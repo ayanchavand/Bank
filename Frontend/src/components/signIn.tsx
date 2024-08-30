@@ -8,8 +8,8 @@ export default function SignIn(){
         auth.signInWithPopup(provider)
     }
     return(
-        <div className="flex items-center justify-center ">
-            <Button onClick={onSignInWithGoogle} className="border border-spacing-2 text-xl ">Sign in with Google</Button>
+        <div className="flex justify-center items-center my-56">
+            <Button onClick={onSignInWithGoogle} className="border border-spacing-2 text-xl">Sign in with Google</Button>
         </div>
     )    
  }

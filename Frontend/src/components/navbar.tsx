@@ -6,8 +6,8 @@ export default function NavBar() {
             <a href="/" className="text-2xl font-bold font-mono">Bank app</a>
             <ul className="">
                 <li className="flex gap-4 ">
-                    <a href="/addcard">Add Card</a>
-                    <a href="/viewcard">View Card</a>
+                    <a href="/addCard">Add Card</a>
+                    <a href="/viewCard">View Card</a>
                 </li>
             </ul>
         </nav>

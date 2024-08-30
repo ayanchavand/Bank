@@ -15,7 +15,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-export default function cardForm() {
+export default function CardForm() {
 
     const [isCredit, setIsCredit] = useState(true)
 
