@@ -8,12 +8,13 @@ import DebitCardView from './components/debitCardView'
 import CreditCardForm from './components/forms/creditCardForm'
 import CreditCardView from './components/creditCardView'
 import CardView from './components/cardView'
+import NavBar from './components/navbar'
 function App() {
  const [user] = useAuthState(auth)
   return (
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        {user ? <CardView/> :<SignIn/>}
+        <NavBar/>
       </ThemeProvider>
     </>
   )
