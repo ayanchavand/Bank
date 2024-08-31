@@ -22,7 +22,6 @@ const CopyButton = ({value, label}) =>{
     </Button>
   );
 
-
 }
 
 const CreditCardView = ({index, cardData }) => {
@@ -47,7 +46,7 @@ const CreditCardView = ({index, cardData }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto" key={index}>
+    <Card className="w-full max-w-md mx-auto bg-gray-50 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out" key={index}>
       <CardHeader>
         <CardTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <span className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
@@ -86,15 +85,12 @@ const CreditCardView = ({index, cardData }) => {
         <div>
           <span className="text-sm">PIN: {pin}</span>
         </div>
-        <div>
-          <span className="text-sm">mPIN: {mPin}</span>
-        </div>
-        <div>
-          <span className="text-sm">UPI ID: {upiId}</span>
-        </div>
-        <div>
-          <span className="text-sm">UPI PIN: {upiPin}</span>
-        </div>
+          {mPin && <div><span className="text-sm">mPIN: {mPin}</span></div>}
+        
+          {upiId && <div><span className="text-sm">UPI ID: {upiId}</span></div>}
+        
+          {upiPin && <div> <span className="text-sm">UPI PIN: {upiPin}</span></div>}
+        
         <div>
           <span className="text-sm">Bill Date: {billDate}</span>
         </div>

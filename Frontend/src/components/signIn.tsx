@@ -19,7 +19,7 @@ export default function SignIn(){
     else{
         return(
             <div className="flex justify-center items-center my-56">
-                <h1 className="text-3xl">You are already Signed in</h1>
+                <h1 className="text-3xl">Welcome, {auth.currentUser?.displayName}</h1>
             </div>
         ) 
     }

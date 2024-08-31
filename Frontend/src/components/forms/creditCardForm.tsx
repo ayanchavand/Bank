@@ -31,10 +31,10 @@ const creditFormSchema = z.object({
     expiryYear: z.string().min(2, "Year cannot be in the past"),
     cvv: z.string().length(3, "CVV must be exactly 3 digits"),
     pin: z.string().length(4, "PIN must be exactly 4 digits"),
-    mPin: z.string(),
-    email: z.string().email(),
+    mPin: z.string().optional(), 
+    email: z.string().email('Not a valid email'),
     upiId: z.string().optional(),
-    upiPin: z.string(),
+    upiPin: z.string().optional(),
     billDate: z.string(),
     dueDate: z.string(),
 
@@ -55,6 +55,9 @@ export default function CreditCardForm() {
             cvv: "",
             pin: "",
             mPin: "",
+            email: "",
+            upiId: "",
+            upiPin: "",
         },
     })
 
