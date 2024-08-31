@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select"
 
 import { Input } from "@/components/ui/input"
+import { toast } from "../ui/use-toast"
 
 // Define the Zod schema
 const creditFormSchema = z.object({
@@ -31,8 +32,8 @@ const creditFormSchema = z.object({
     cvv: z.string().length(3, "CVV must be exactly 3 digits"),
     pin: z.string().length(4, "PIN must be exactly 4 digits"),
     mPin: z.string(),
-    email: z.string(),
-    upiId: z.string(),
+    email: z.string().email(),
+    upiId: z.string().optional(),
     upiPin: z.string(),
     billDate: z.string(),
     dueDate: z.string(),
@@ -62,7 +63,9 @@ export default function CreditCardForm() {
     function onSubmit(values: z.infer<typeof creditFormSchema>) {
         console.log(values)
         addCreditData(values)
-
+        toast({
+            title: `${values.bankCardName} Added Successfully!`,
+          });
     }
 
 
@@ -93,7 +96,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>Card Number</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="XXXXXXXXXXXX1234" {...field} />
+                                    <Input placeholder="XXXXXXXXXXXX1234" type="number" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -130,7 +133,7 @@ export default function CreditCardForm() {
                                 <FormItem>
                                     <FormLabel>Expiry Month:</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="MM" {...field} />
+                                        <Input placeholder="MM" type="number" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -143,7 +146,7 @@ export default function CreditCardForm() {
                                 <FormItem>
                                     <FormLabel>Expiry Year:</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="YY" {...field} />
+                                        <Input placeholder="YY" type="number" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -159,7 +162,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>CVV:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="123" {...field} />
+                                    <Input placeholder="123" type="number" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -188,7 +191,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>Registered Email:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="example@mail.com" type="email" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -202,7 +205,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>UPI ID:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="example@bank" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -215,7 +218,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>UPI Pin:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="1234/123456" type="number" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -228,7 +231,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>Bill Date:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="DD/MM" type="tel" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -242,7 +245,7 @@ export default function CreditCardForm() {
                             <FormItem>
                                 <FormLabel>Due Date:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="DD/MM" type="tel" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

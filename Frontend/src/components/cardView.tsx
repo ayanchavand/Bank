@@ -39,7 +39,7 @@ export default function CardView() {
     }
 
     return (
-        <>
+        <div className="">
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
                     <AccordionTrigger>Credit Cards</AccordionTrigger>
@@ -69,6 +69,6 @@ export default function CardView() {
                 </AccordionItem>
             </Accordion>
 
-        </>
+        </div>
     )
 }
