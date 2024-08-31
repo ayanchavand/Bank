@@ -9,19 +9,24 @@ import CardView from './components/cardView'
 import NavBar from './components/navbar'
 function App() {
   const [user] = useAuthState(auth)
+  if(user){
+    return (
+      <>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<SignIn/>}/>
+            <Route path='/addCard' element={<CardForm/>}/>
+            <Route path='/viewCard' element={<CardView/>}/>
+          </Routes>
+        </ThemeProvider>
+      </>
+    )
+  }
+  else{
+    return (<SignIn/>)
+  }
   
-  return (
-    <>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <NavBar />
-        <Routes>
-          <Route path='/' element={<SignIn/>}/>
-          <Route path='/addCard' element={<CardForm/>}/>
-          <Route path='/viewCard' element={<CardView/>}/>
-        </Routes>
-      </ThemeProvider>
-    </ >
-  )
 }
 
 export default App
