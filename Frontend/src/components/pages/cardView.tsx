@@ -1,6 +1,6 @@
 import { getCreditCards, getDebitCards } from "@/utils/firebase"
 import { useEffect, useState } from "react"
-import CreditCardView from "./creditCardView";
+import CreditCardView from "@/components/creditCardView";
 import {
     Accordion,
     AccordionContent,
