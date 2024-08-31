@@ -1,7 +1,7 @@
 "use client"
 
-import DebitCardForm from "./forms/debitCardForm"
-import CreditCardForm from "./forms/creditCardForm"
+import DebitCardForm from "../forms/debitCardForm"
+import CreditCardForm from "../forms/creditCardForm"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function CardForm() {
