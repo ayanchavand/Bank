@@ -11,28 +11,29 @@ import {
 export default function CardView() {
     const [creditCardArr, setCreditCardArr] = useState([])
     const [debitCardArr, setDebitCardArr] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
     useEffect(() => {
         const fetchCards = async () => {
-            setIsLoading(true);
-            setError(null);
+            setIsLoading(true)
+            setError(null)
             try {
                 const [creditCards, debitCards] = await Promise.all([
                     getCreditCards(),
                     getDebitCards()
                 ]);
-                setCreditCardArr(creditCards || []);
-                setDebitCardArr(debitCards || []);
+                setCreditCardArr(creditCards || [])
+                setDebitCardArr(debitCards || [])
             } catch (error) {
-                console.error("Error fetching cards:", error);
-                setError("Failed to fetch card data. Please try again later.");
+                console.error("Error fetching cards:", error)
+                setError("Failed to fetch card data. Please try again later.")
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
-        };
-        fetchCards();
-    }, []);
+        }
+        fetchCards()
+    }, [])
 
     if (isLoading) {
         return <div>Loading...</div>;
