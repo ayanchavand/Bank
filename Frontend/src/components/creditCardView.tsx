@@ -46,7 +46,7 @@ const CreditCardView = ({index, cardData }) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-gray-50 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out" key={index}>
+    <Card className="w-full max-w-md mx-auto bg-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out" key={index}>
       <CardHeader>
         <CardTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <span className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
