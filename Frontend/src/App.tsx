@@ -1,14 +1,17 @@
-import './App.css'
-import CardForm from './components/cardForm'
-import { ThemeProvider } from './components/themeProvider'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from './utils/firebase'
 import { Route, Routes } from 'react-router-dom'
+import { auth } from './utils/firebase'
+import { ThemeProvider } from './components/themeProvider'
+import CardForm from './components/cardForm'
 import SignIn from './components/signIn'
 import CardView from './components/cardView'
 import NavBar from './components/navbar'
+import './App.css'
+
 function App() {
-  const [user] = useAuthState(auth)
+  //auth as any is just a band aid
+  //solution for a ts error
+  const [user] = useAuthState(auth as any)
 
   if (user) {
     return (
