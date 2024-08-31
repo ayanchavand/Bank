@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { addCreditData } from '../../utils/firebase'
-import { Button } from "@/components/ui/button"
+import { useForm } from "react-hook-form"
+import { addCreditData } from '@/utils/firebase'
 import {
     Form,
     FormControl,
@@ -18,11 +17,14 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { toast } from "../ui/use-toast"
+import { toast } from "@/components/ui/use-toast"
 
-// Define the Zod schema
+//Form Schema for zod
+//just used for error handling of data in fields
+//so you don't go insane implementing every single
+//check using regex ffs
 const creditFormSchema = z.object({
     bankCardName: z.string().min(1, "Bank card name is required"),
     cardNumber: z.string().length(16, "Card number must be exactly 16 digits"),
@@ -37,13 +39,12 @@ const creditFormSchema = z.object({
     upiPin: z.string().optional(),
     billDate: z.string(),
     dueDate: z.string(),
-
 })
 
 export default function CreditCardForm() {
-
-
-
+    //Creates a Form object to connect 
+    //to react form hook
+    //and also adds default values for the values
     const creditForm = useForm<z.infer<typeof creditFormSchema>>({
         resolver: zodResolver(creditFormSchema),
         defaultValues: {
@@ -61,22 +62,20 @@ export default function CreditCardForm() {
         },
     })
 
-    const onInvalid = (error) => console.error(error)
-
+    //Submit functions
+    const onInvalid = (error: unknown) => console.error(error)
     function onSubmit(values: z.infer<typeof creditFormSchema>) {
         console.log(values)
         addCreditData(values)
         toast({
-            title: `${values.bankCardName} Added Successfully!`,
-          });
+            title: `${values.bankCardName} added successfully!`,
+        })
     }
-
 
     return (
         <>
             <h1 className="text-4xl font-semibold my-6">Credit Card</h1>
-            <Form{...creditForm}>
-
+            <Form {...creditForm}>
                 <form onSubmit={creditForm.handleSubmit(onSubmit, onInvalid)}>
                     <FormField
                         control={creditForm.control}
@@ -91,7 +90,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
                     <FormField
                         control={creditForm.control}
                         name="cardNumber"
@@ -127,7 +125,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
                     <div>
                         <FormField
                             control={creditForm.control}
@@ -156,8 +153,6 @@ export default function CreditCardForm() {
                             )}
                         />
                     </div>
-
-
                     <FormField
                         control={creditForm.control}
                         name="cvv"
@@ -171,7 +166,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
                     <FormField
                         control={creditForm.control}
                         name="pin"
@@ -185,8 +179,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
-
                     <FormField
                         control={creditForm.control}
                         name="email"
@@ -200,7 +192,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
                     <FormField
                         control={creditForm.control}
                         name="upiId"
@@ -240,7 +231,6 @@ export default function CreditCardForm() {
                             </FormItem>
                         )}
                     />
-
                     <FormField
                         control={creditForm.control}
                         name="dueDate"

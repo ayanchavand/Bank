@@ -4,26 +4,7 @@ import { toast } from './ui/use-toast';
 import { Button } from './ui/button';
 
 
-const CopyButton = ({value, label}) =>{
-  const handleCopy = () => {
-    navigator.clipboard.writeText(value).then(() => {
-      toast({
-        title: "Copied!",
-        description: `${label} copied to clipboard.`,
-      });
-    }).catch((err) => {
-      console.error('Failed to copy: ', err);
-    });
-  };
-  return (
-    <Button variant="link" size="icon" onClick={handleCopy} className="ml-2">
-      <Copy className='h-4 w-4'/>
-    </Button>
-  );
-
-}
-
-const CreditCardView = ({index, cardData }) => {
+const CreditCardView = ({index , cardData}) => {
   const {
     bankCardName,
     cardNumber,
@@ -38,18 +19,23 @@ const CreditCardView = ({index, cardData }) => {
     upiPin,
     billDate,
     dueDate
-  } = cardData;
+  } = cardData
 
   const maskCardNumber = (number: BigInteger) => {
-    return '*'.repeat(12) + number.slice(-4);
-  };
+    return '*'.repeat(12) + number.slice(-4)
+  }
 
   return (
-    <Card className="w-full max-w-md border mx-auto bg-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out" key={index}>
+    <Card 
+    className="w-full max-w-md border mx-auto bg-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out" 
+    key={index}>
       <CardHeader>
-        <CardTitle className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-          <span className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
-          <span className="text-2xl rounded px-2 py-1">{cardType}</span>
+        <CardTitle 
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <span 
+          className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
+          <span 
+          className="text-2xl rounded px-2 py-1">{cardType}</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -89,7 +75,6 @@ const CreditCardView = ({index, cardData }) => {
           {upiId && <div><span className="text-sm">UPI ID: {upiId}</span></div>}
         
           {upiPin && <div> <span className="text-sm">UPI PIN: {upiPin}</span></div>}
-        
         <div>
           <span className="text-sm">Bill Date: <b>{billDate}th</b> of every month</span>
         </div>
@@ -98,7 +83,26 @@ const CreditCardView = ({index, cardData }) => {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export default CreditCardView;
+const CopyButton = ({value, label}) =>{
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value).then(() => {
+      toast({
+        title: "Copied!",
+        description: `${label} copied to clipboard.`,
+      });
+    }).catch((err) => {
+      console.error('Failed to copy: ', err);
+    });
+  };
+  return (
+    <Button variant="link" size="icon" onClick={handleCopy} className="ml-2">
+      <Copy className='h-4 w-4'/>
+    </Button>
+  );
+
+}
+
+export default CreditCardView
