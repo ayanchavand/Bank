@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select"
 
 import { Input } from "@/components/ui/input"
-import { addDebitData } from '../../utils/firebase'
+import { addCardData } from '../../utils/firebase'
 
 const debitFromSchema = z.object({
     bankCardName: z.string(),
@@ -59,7 +59,7 @@ export default function DebitCardForm() {
     const onInvalid = (error) => console.error(error)
     function onSubmit(values: z.infer<typeof debitFromSchema>) {
         console.log(values)
-        addDebitData(values)
+        addCardData(values, 'debitCard')
     }
     return (
         <>
