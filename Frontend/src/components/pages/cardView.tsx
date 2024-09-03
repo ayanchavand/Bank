@@ -1,6 +1,7 @@
 import { getCreditCards, getDebitCards, updateCardArray } from "@/utils/firebase"
 import { useEffect, useState } from "react"
-import CreditCardView from "@/components/creditCardView";
+import CreditCardView from "@/components/creditCardView"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
     Accordion,
     AccordionContent,
@@ -35,7 +36,7 @@ export default function CardView() {
         fetchCards()
     }, [])
 
-    const onDelete = async (index) =>{
+    const onDelete = async (index) => {
         const newArr = [...creditCardArr]
         newArr.splice(index, 1)
         setCreditCardArr(newArr)
@@ -48,35 +49,32 @@ export default function CardView() {
 
     return (
         <div className="">
-            <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                    <AccordionTrigger>Credit Cards</AccordionTrigger>
-                    <AccordionContent>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                            {(creditCardArr.length === 0) ? <h1> No data found</h1>:
+            <Tabs defaultValue="creditCard" className="">
+                <TabsList className="">
+                    <TabsTrigger value="creditCard">Credit Card</TabsTrigger>
+                    <TabsTrigger value="debitCard">Debit Card</TabsTrigger>
+                </TabsList>
+                <TabsContent value="creditCard">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {(creditCardArr.length === 0) ? <h1> No data found</h1> :
                             creditCardArr.map((cardDetail, index) => (
                                 <div key={index} className="p-2">
-                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete}/>
+                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete} />
                                 </div>
                             ))}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                    <AccordionTrigger>Debit Cards</AccordionTrigger>
-                    <AccordionContent>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                            {(debitCardArr.length === 0) ? <h1> No data found</h1>:
+                    </div>
+                </TabsContent>
+                <TabsContent value="debitCard">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {(debitCardArr.length === 0) ? <h1> No data found</h1> :
                             debitCardArr.map((cardDetail, index) => (
                                 <div key={index} className="p-2">
-                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete}/>
+                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete} />
                                 </div>
                             ))}
-                        </div>
-                    </AccordionContent>
-                </AccordionItem>
-            </Accordion>
-
+                    </div>
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }
