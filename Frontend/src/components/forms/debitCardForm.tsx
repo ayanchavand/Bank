@@ -73,7 +73,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Bank & Card Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Namedhskfhkjds" {...field} />
+                                    <Input placeholder="Name" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -87,7 +87,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Account Holder Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Namedhskfhkjds" {...field} />
+                                    <Input placeholder="Name" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -101,7 +101,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Account Number</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Name" {...field} />
+                                    <Input placeholder="XXXXXXXXXXXX1234" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -115,7 +115,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>IFSC Code</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Name" {...field} />
+                                    <Input placeholder="" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -127,7 +127,7 @@ export default function DebitCardForm() {
                         name="branchName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel> Branch Name</FormLabel>
+                                <FormLabel>Branch Name</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Name" {...field} />
                                 </FormControl>
@@ -237,7 +237,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>User ID/ Customer ID</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="User ID" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -250,7 +250,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Old Internet Password:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -263,7 +263,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>New Internet Password:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -289,7 +289,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Old Transaction Password:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -303,7 +303,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>New Transaction Password:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -317,7 +317,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Registered Mobile Number:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="9846374856" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -331,7 +331,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>Registered Email:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="example@mail.com" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -345,7 +345,7 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>UPI ID:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="example@bank" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -358,14 +358,13 @@ export default function DebitCardForm() {
                             <FormItem>
                                 <FormLabel>UPI Pin:</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="YY" {...field} />
+                                    <Input placeholder="1234/123456" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
                     <Button className='mt-7' type="submit">Submit</Button>
-
                 </form>
             </Form>
         </>
