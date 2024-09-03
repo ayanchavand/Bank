@@ -7,6 +7,7 @@ import {
   setDoc,
   getDoc,
   arrayUnion,
+  arrayRemove,
   updateDoc,
   DocumentReference,
 } from "firebase/firestore";
@@ -43,8 +44,6 @@ export const addCardData = async (
 
   try {
     //Checks if there exists data for user
-    
-    
     const docSnapshot = await getDoc(docRef);
     const data = docSnapshot.data();
     //if not adds the default empty data
@@ -93,6 +92,22 @@ export const getCards = async (cardType: "creditCard" | "debitCard") => {
     throw error;
   }
 };
+
+export const updateCardArray = async(cardDataArr : object, cardType: "creditCard" | "debitCard") =>{
+  const docRef = getUserDocRef();
+  if (!docRef) {
+    console.error("User not authenticated");
+    return;
+  }
+
+  try{
+    await updateDoc(docRef, {
+      [cardType]: cardDataArr
+    })
+  } catch(error){
+    console.log(error)
+  }
+}
 
 //Nothing to see here, just a function wrapper
 export const addCreditData = (values: object) =>
