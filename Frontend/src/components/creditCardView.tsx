@@ -1,10 +1,13 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { CreditCard, Calendar, Mail, Hash, Copy } from 'lucide-react';
+import { CreditCard, Calendar, Mail, Hash, Copy, Delete, DeleteIcon, Trash, Edit } from 'lucide-react';
 import { toast } from './ui/use-toast';
 import { Button } from './ui/button';
+import ReactCardFlip from 'react-card-flip'
+import { useState } from 'react';
 
 
-const CreditCardView = ({index , cardData}) => {
+const CreditCardView = ({ index, cardData }) => {
+  const [isFlipped, setIsFlipped] = useState(false)
   const {
     bankCardName,
     cardNumber,
@@ -26,67 +29,94 @@ const CreditCardView = ({index , cardData}) => {
   }
 
   return (
-    <Card 
-    className="w-full max-w-xl border-double mx-auto bg-neutral-100 shadow-xl hover:bg-neutral-200 " 
-    key={index}>
-      <CardHeader>
-        <CardTitle 
-        className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-          <span 
-          className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
-          <span 
-          className="text-2xl rounded px-2 py-1">{cardType}</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="col-span-1 sm:col-span-2">
-          <div className="flex items-center">
-            <CreditCard className="mr-2 h-5 w-5" />
-            <span className="font-bold text-sm sm:text-base">{maskCardNumber(cardNumber)}
-            <CopyButton value={cardNumber} label="Card Number"/>
-            </span>
+    <ReactCardFlip flipDirection='horizontal' isFlipped={isFlipped}>
+      <Card
+        className="w-full max-w-xl border-double mx-auto bg-neutral-100 shadow-xl"
+        key={index} onClick={() => { setIsFlipped(!isFlipped) }}>
+        <CardHeader>
+          <CardTitle
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <span
+              className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
+            <span
+              className="text-2xl rounded px-2 py-1">{cardType}</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="col-span-1 sm:col-span-2">
+            <div className="flex items-center">
+              <CreditCard className="mr-2 h-5 w-5" />
+              <InteractiveWrapper>
+              <span className="font-bold text-sm sm:text-base">{maskCardNumber(cardNumber)}
+                  <CopyButton value={cardNumber} label="Card Number" />
+                
+              </span>
+              </InteractiveWrapper>
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="flex items-center">
-            <Calendar className="mr-2 h-4 w-4" />
-            <span className="text-sm">Expires: {expiryMonth}/{expiryYear}</span>
+          <div>
+            <div className="flex items-center">
+              <Calendar className="mr-2 h-4 w-4" />
+              <span className="text-sm">Expires: {expiryMonth}/{expiryYear}</span>
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="flex items-center">
-            <Hash className="mr-2 h-4 w-4" />
-            <span className="text-sm">CVV: ***
-            <CopyButton value={cvv} label="CVV"/>
-            </span>
+          <div>
+            <div className="flex items-center">
+              <Hash className="mr-2 h-4 w-4" />
+              <InteractiveWrapper>
+                <span className="text-sm">CVV: ***
+                  <CopyButton value={cvv} label="CVV" />
+                </span>
+              </InteractiveWrapper>
+            </div>
           </div>
-        </div>
-        <div className="col-span-1 sm:col-span-2">
-          <div className="flex items-center">
-            <Mail className="mr-2 h-4 w-4" />
-            <span className="text-sm break-all">{email}</span>
+          <div className="col-span-1 sm:col-span-2">
+            <div className="flex items-center">
+              <Mail className="mr-2 h-4 w-4" />
+              <span className="text-sm break-all">{email}</span>
+            </div>
           </div>
-        </div>
-        <div>
-          <span className="text-sm">PIN: {pin}</span>
-        </div>
+          <div>
+            <span className="text-sm">PIN: {pin}</span>
+          </div>
           {mPin && <div><span className="text-sm">mPIN: {mPin}</span></div>}
-        
+
           {upiId && <div><span className="text-sm">UPI ID: {upiId}</span></div>}
-        
+
           {upiPin && <div> <span className="text-sm">UPI PIN: {upiPin}</span></div>}
-        <div>
-          <span className="text-sm">Bill Date: <b>{billDate}th</b> of every month</span>
-        </div>
-        <div>
-          <span className="text-sm">Due Date: <b>{dueDate}th</b> of every month</span>
-        </div>
-      </CardContent>
-    </Card>
+          <div>
+            <span className="text-sm">Bill Date: <b>{billDate}th</b> of every month</span>
+          </div>
+          <div>
+            <span className="text-sm">Due Date: <b>{dueDate}th</b> of every month</span>
+          </div>
+        </CardContent>
+      </Card>
+      <Card
+        className="w-full max-w-xl border-double mx-auto bg-neutral-100 shadow-xl"
+        key={index} onClick={() => { setIsFlipped(!isFlipped) }}>
+        <CardHeader>
+          <CardTitle
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <span
+              className="text-lg font-bold mb-2 sm:mb-0">{bankCardName}</span>
+            <span
+              className="text-2xl rounded px-2 py-1">{cardType}</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent >
+          <InteractiveWrapper>
+            <Button variant='destructive' className='mx-5 mb-5 w-36'><Trash className='w-4 m-1'/>Delete</Button>
+            <Button variant='default' className=' w-36'><Edit className='w-4 m-1'/>Edit</Button>
+          </InteractiveWrapper>
+        </CardContent>
+      </Card>
+
+    </ReactCardFlip>
   )
 }
 
-const CopyButton = ({value, label}) =>{
+const CopyButton = ({ value, label }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
       toast({
@@ -99,10 +129,14 @@ const CopyButton = ({value, label}) =>{
   };
   return (
     <Button variant="link" size="icon" onClick={handleCopy} className="ml-2">
-      <Copy className='h-4 w-4'/>
+      <Copy className='h-4 w-4' />
     </Button>
   );
 
 }
+
+const InteractiveWrapper = ({ children }) => (
+  <div onClick={(e) => e.stopPropagation()}>{children}</div>
+);
 
 export default CreditCardView
