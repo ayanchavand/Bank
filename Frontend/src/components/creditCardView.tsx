@@ -16,6 +16,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
+
 const CreditCardView = ({ index, cardData, onDelete }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
@@ -157,7 +158,7 @@ const CreditCardView = ({ index, cardData, onDelete }) => {
   )
 }
 
-const CopyButton = ({ value, label }) => {
+const CopyButton = ({ value, label }: Props) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
       toast({
