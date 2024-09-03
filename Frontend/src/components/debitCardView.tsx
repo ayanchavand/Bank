@@ -4,6 +4,7 @@ import { toast } from './ui/use-toast';
 import { Button } from './ui/button';
 import ReactCardFlip from 'react-card-flip';
 import { useEffect, useState } from 'react';
+import { FC } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,7 +17,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const DebitCardView = ({ index, cardData, onDelete }) => {
+const DebitCardView:FC<any> = ({ index, cardData, onDelete }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const onCardDelete = () => {
@@ -50,7 +51,7 @@ const DebitCardView = ({ index, cardData, onDelete }) => {
     upiPin,
   } = cardData;
 
-  const maskCardNumber = (number) => {
+  const maskCardNumber = (number: String) => {
     return '*'.repeat(12) + number.slice(-4);
   };
 
@@ -171,7 +172,7 @@ const DebitCardView = ({ index, cardData, onDelete }) => {
   );
 };
 
-const CopyButton = ({ value, label }) => {
+const CopyButton:FC<any> = ({ value, label }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
       toast({
@@ -189,7 +190,7 @@ const CopyButton = ({ value, label }) => {
   );
 };
 
-const InteractiveWrapper = ({ children }) => (
+const InteractiveWrapper:FC<any> = ({ children }) => (
   <div onClick={(e) => e.stopPropagation()}>{children}</div>
 );
 

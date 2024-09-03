@@ -3,7 +3,7 @@ import { CreditCard, Calendar, Mail, Hash, Copy, Trash, Edit } from 'lucide-reac
 import { toast } from './ui/use-toast';
 import { Button } from './ui/button';
 import ReactCardFlip from 'react-card-flip'
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 
-const CreditCardView = ({ index, cardData, onDelete }) => {
+const CreditCardView:FC<any> = ({ index, cardData, onDelete }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
   const onCardDelete = () =>{
@@ -158,7 +158,7 @@ const CreditCardView = ({ index, cardData, onDelete }) => {
   )
 }
 
-const CopyButton = ({ value, label }: Props) => {
+const CopyButton:FC<any> = ({ value, label }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
       toast({
@@ -177,7 +177,7 @@ const CopyButton = ({ value, label }: Props) => {
 
 }
 
-const InteractiveWrapper = ({ children }) => (
+const InteractiveWrapper:FC<any> = ({ children }) => (
   <div onClick={(e) => e.stopPropagation()}>{children}</div>
 );
 

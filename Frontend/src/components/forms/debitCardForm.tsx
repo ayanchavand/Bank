@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -17,8 +16,6 @@ import {
     SelectContent,
     SelectItem,
     SelectTrigger,
-    SelectGroup,
-    SelectLabel,
     SelectValue,
 } from "@/components/ui/select"
 
@@ -56,7 +53,7 @@ export default function DebitCardForm() {
     })
 
     //TODO: FIX TYPE ERROR
-    const onInvalid = (error) => console.error(error)
+    const onInvalid = (error: any) => console.error(error)
     function onSubmit(values: z.infer<typeof debitFromSchema>) {
         console.log(values)
         addCardData(values, 'debitCard')

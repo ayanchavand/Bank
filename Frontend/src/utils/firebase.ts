@@ -7,7 +7,6 @@ import {
   setDoc,
   getDoc,
   arrayUnion,
-  arrayRemove,
   updateDoc,
   DocumentReference,
 } from "firebase/firestore";

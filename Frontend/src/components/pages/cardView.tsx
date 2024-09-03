@@ -2,12 +2,7 @@ import { getCreditCards, getDebitCards, updateCardArray } from "@/utils/firebase
 import { useEffect, useState } from "react"
 import CreditCardView from "@/components/creditCardView"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
+
 import DebitCardView from "../debitCardView"
 
 export default function CardView() {
@@ -37,7 +32,7 @@ export default function CardView() {
         fetchCards()
     }, [])
 
-    const onDelete = async (index) => {
+    const onDelete = async (index: number) => {
         const newArr = [...creditCardArr]
         newArr.splice(index, 1)
         setCreditCardArr(newArr)
