@@ -1,13 +1,31 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { CreditCard, Calendar, Mail, Hash, Copy, Delete, DeleteIcon, Trash, Edit } from 'lucide-react';
+import { CreditCard, Calendar, Mail, Hash, Copy, Trash, Edit } from 'lucide-react';
 import { toast } from './ui/use-toast';
 import { Button } from './ui/button';
 import ReactCardFlip from 'react-card-flip'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
-
-const CreditCardView = ({ index, cardData }) => {
+const CreditCardView = ({ index, cardData, onDelete }) => {
   const [isFlipped, setIsFlipped] = useState(false)
+
+  const onCardDelete = () =>{
+    toast({
+      title: 'Card removed'
+    })
+    onDelete(index)
+  }
+
   const {
     bankCardName,
     cardNumber,
@@ -28,6 +46,10 @@ const CreditCardView = ({ index, cardData }) => {
     return '*'.repeat(12) + number.slice(-4)
   }
 
+  useEffect(()=>{
+    setIsFlipped(false)
+  },[cardData])
+
   return (
     <ReactCardFlip flipDirection='horizontal' isFlipped={isFlipped}>
       <Card
@@ -47,10 +69,10 @@ const CreditCardView = ({ index, cardData }) => {
             <div className="flex items-center">
               <CreditCard className="mr-2 h-5 w-5" />
               <InteractiveWrapper>
-              <span className="font-bold text-sm sm:text-base">{maskCardNumber(cardNumber)}
+                <span className="font-bold text-sm sm:text-base">{maskCardNumber(cardNumber)}
                   <CopyButton value={cardNumber} label="Card Number" />
-                
-              </span>
+
+                </span>
               </InteractiveWrapper>
             </div>
           </div>
@@ -106,8 +128,27 @@ const CreditCardView = ({ index, cardData }) => {
         </CardHeader>
         <CardContent >
           <InteractiveWrapper>
-            <Button variant='destructive' className='mx-5 mb-5 w-36'><Trash className='w-4 m-1'/>Delete</Button>
-            <Button variant='default' className=' w-36'><Edit className='w-4 m-1'/>Edit</Button>
+            
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+              <Button variant='destructive' className='mx-5 mb-5 w-36'><Trash className='w-4 m-1' />Delete</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your account
+                    and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={onCardDelete}>Continue</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
+            <Button variant='default' className=' w-36'><Edit className='w-4 m-1' />Edit</Button>
           </InteractiveWrapper>
         </CardContent>
       </Card>
