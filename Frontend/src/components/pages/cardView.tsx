@@ -8,6 +8,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
+import DebitCardView from "../debitCardView"
 
 export default function CardView() {
     const [creditCardArr, setCreditCardArr] = useState([])
@@ -69,7 +70,7 @@ export default function CardView() {
                         {(debitCardArr.length === 0) ? <h1> No data found</h1> :
                             debitCardArr.map((cardDetail, index) => (
                                 <div key={index} className="p-2">
-                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete} />
+                                    <DebitCardView cardData={cardDetail} index={index} onDelete={onDelete} />
                                 </div>
                             ))}
                     </div>
