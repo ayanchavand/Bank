@@ -1,4 +1,4 @@
-import { getCreditCards, getDebitCards } from "@/utils/firebase"
+import { getCreditCards, getDebitCards, updateCardArray } from "@/utils/firebase"
 import { useEffect, useState } from "react"
 import CreditCardView from "@/components/creditCardView";
 import {
@@ -35,6 +35,13 @@ export default function CardView() {
         fetchCards()
     }, [])
 
+    const onDelete = async (index) =>{
+        const newArr = [...creditCardArr]
+        newArr.splice(index, 1)
+        setCreditCardArr(newArr)
+        updateCardArray(newArr, 'creditCard')
+    }
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -49,7 +56,7 @@ export default function CardView() {
                             {(creditCardArr.length === 0) ? <h1> No data found</h1>:
                             creditCardArr.map((cardDetail, index) => (
                                 <div key={index} className="p-2">
-                                    <CreditCardView cardData={cardDetail} index={index} />
+                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete}/>
                                 </div>
                             ))}
                         </div>
@@ -62,7 +69,7 @@ export default function CardView() {
                             {(debitCardArr.length === 0) ? <h1> No data found</h1>:
                             debitCardArr.map((cardDetail, index) => (
                                 <div key={index} className="p-2">
-                                    <CreditCardView cardData={cardDetail} index={index} />
+                                    <CreditCardView cardData={cardDetail} index={index} onDelete={onDelete}/>
                                 </div>
                             ))}
                         </div>
