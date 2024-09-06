@@ -54,7 +54,7 @@ const CreditCardView:FC<any> = ({ index, cardData, onDelete }) => {
   return (
     <ReactCardFlip flipDirection='horizontal' isFlipped={isFlipped}>
       <Card
-        className="w-full max-w-xl border-double mx-auto bg-neutral-100 shadow-xl"
+        className="w-full max-w-xl border-2 mx-auto bg-neutral-100 shadow-xl"
         key={index} onClick={() => { setIsFlipped(!isFlipped) }}>
         <CardHeader>
           <CardTitle
@@ -116,7 +116,7 @@ const CreditCardView:FC<any> = ({ index, cardData, onDelete }) => {
         </CardContent>
       </Card>
       <Card
-        className="w-full max-w-xl border-double mx-auto bg-neutral-100 shadow-xl"
+        className="w-full max-w-xl border-double mx-auto bg-neutral-200 shadow-xl"
         key={index} onClick={() => { setIsFlipped(!isFlipped) }}>
         <CardHeader>
           <CardTitle
